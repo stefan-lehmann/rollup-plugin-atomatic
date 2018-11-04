@@ -1,4 +1,5 @@
 const
+  path = require('path'),
   atomatic = require('atomatic'),
   compiler = require('./compiler');
 
@@ -16,7 +17,7 @@ module.exports = (options = {}) => {
     resolveId: async id => {
       const test = await compiler.compiledAtomaticFiles;
       if (test.find(({componentName}) => componentName === id) !== undefined) {
-        return id;
+        return `${id}.vue.js`;
       }
     },
     load: async id => {
@@ -26,7 +27,7 @@ module.exports = (options = {}) => {
 
       const
         test = await compiler.compiledAtomaticFiles,
-        file = test.find(({componentName}) => componentName === `${id}.vue`);
+        file = test.find(({componentName}) => componentName === `${path.basename(id, path.extname(id))}`);
 
       if (file !== undefined) {
         try {

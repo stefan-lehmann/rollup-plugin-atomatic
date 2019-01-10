@@ -15,7 +15,7 @@ compiler.compileAtomaticFile = async ({file, useMockdata, path, global}) => {
 
   let {cache: {[hash]: {lastCompileTime = 0, script, source = '', locals = ''} = {}}} = compiler;
 
-  if (fs.existsSync(jsFilename) && (!script || fs.statSync(jsFilename).mtimeMs > timestamp)) {
+  if (fs.existsSync(jsFilename) && (!script || fs.statSync(jsFilename).mtimeMs > timestamp - 10000)) {
     script = fs.readFileSync(jsFilename, 'utf8');
   }
 

@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-atomatic",
   "description": "A transform for rollup that allows you to require compiled Atomatic templates in Javascript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "url": "https://github.com/stefan-lehmann/rollup-plugin-atomatic",
   "main": "./index.js",

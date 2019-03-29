@@ -1,7 +1,6 @@
-const
-  fs = require('fs'),
-  objectHash = require('object-hash'),
-  compiler = {};
+const fs = require('fs');
+const objectHash = require('object-hash');
+const compiler = {};
 
 compiler.replaceFileExtension = (filename, extension) => {
   const i = filename.indexOf('.');
@@ -9,9 +8,9 @@ compiler.replaceFileExtension = (filename, extension) => {
 };
 
 compiler.compileAtomaticFile = async ({file, useMockdata, path, global}) => {
-  const {filename, componentName, extension, data, timestamp} = file,
-    jsFilename = compiler.replaceFileExtension(filename, 'js'),
-    hash = objectHash.MD5([file.componentName, path, useMockdata].join('--'));
+  const {filename, componentName, extension, data, timestamp, saveHtml, renderHook} = file;
+  const jsFilename = compiler.replaceFileExtension(filename, 'js');
+  const hash = objectHash.MD5([file.componentName, path, useMockdata].join('--'));
 
   let {cache: {[hash]: {lastCompileTime = 0, script, source = '', locals = ''} = {}}} = compiler;
 
@@ -30,9 +29,9 @@ compiler.compileAtomaticFile = async ({file, useMockdata, path, global}) => {
       data,
       hash,
       timestamp,
-      saveHtml: null,
-      saveLocals: null,
-      renderHook: null
+      saveHtml,
+      renderHook,
+      saveLocals: null
     }, global, false));
   }
 
